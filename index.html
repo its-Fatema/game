@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml' lang='' xml:lang=''>
 <head>
-	<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
-
 	<meta charset='utf-8' />
 	<meta name='viewport' content='width=device-width, user-scalable=no' />
 	<title>Popcorn Thief</title>
@@ -140,7 +138,26 @@
     box-sizing: border-box;
   }
 </style>
+<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+<script>
+	// Track loading ad state globally for the Godot process loop
+	window.adsgramLoadingAdStatus = "playing";
 
+	// Initialize AdsGram with your Block ID
+	const AdController = window.Adsgram.init({ 
+		blockId: "int-38505" 
+	});
+
+	// Fire interstitial ad instantly as page renders
+	AdController.show()
+		.then(() => {
+			window.adsgramLoadingAdStatus = "done";
+		})
+		.catch((err) => {
+			console.log("Preloader ad skipped or failed:", err);
+			window.adsgramLoadingAdStatus = "done";
+		});
+</script>
 </head>
 <body>
 	<canvas id='canvas'>
@@ -165,7 +182,7 @@
 	<script type='text/javascript' src='index.js'></script>
 	<script type='text/javascript'>//<![CDATA[
 
-		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":6979808,"index.wasm":19761972},"focusCanvas":true,"gdnativeLibs":[]};
+		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":6977600,"index.wasm":19761972},"focusCanvas":true,"gdnativeLibs":[]};
 		var engine = new Engine(GODOT_CONFIG);
 
 		(function() {
@@ -271,4 +288,3 @@
 	//]]></script>
 </body>
 </html>
-
